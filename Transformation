@@ -1,0 +1,25 @@
+import pandas as pd
+
+df1=pd.read_csv("in/tables/scores.csv")
+df2=pd.read_csv("in/tables/standing.csv")
+
+#converting Dtype object to str
+
+df1["Home_Team"] =df1["Home_Team"].astype(str)
+df1["Away_Team"] =df1["Away_Team"].astype(str)
+
+#convert dtype object to int
+
+df1["Scores"] =df1["Scores"].apply(lambda x: sum(map(int,x.split())))
+
+## Assigning a primary key
+
+Teamscores = df1
+
+Teamscores.to_csv("out/tables/output1.csv",index=False)
+
+## Transformation may be carried out later on the team standing column
+
+Teamstanding = df2
+
+Teamstanding.to_csv("out/tables/output2.csv", index=False)
